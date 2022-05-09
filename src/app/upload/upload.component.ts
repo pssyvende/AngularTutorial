@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-upload',
@@ -9,7 +10,7 @@ export class UploadComponent implements OnInit {
   selectedFile: File | null = null;
   imageUrl: string | ArrayBuffer | null = null;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
   }
@@ -25,6 +26,15 @@ export class UploadComponent implements OnInit {
           this.imageUrl = e.target.result;                   
         }
       }
+    }
+  }
+
+  onFileSubmit() {
+    if (this.selectedFile) {
+      const formData = new FormData();
+      formData.append("image", this.selectedFile);
+      const upload$ = this.http.post("https://api.trace.moe/search", formData);
+      upload$.subscribe(data => console.log(data));
     }
   }
 }

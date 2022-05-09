@@ -11,7 +11,7 @@
                     <input class="form-control rounded-0" type="file" id="formFile" (change)="onFileSelected($event)">
                 </div>
                 <button *ngIf="selectedFile === null" type="button" class="btn btn-danger btn-md px-4 me-md-2 rounded-0 disabled">Recognize</button>
-                <button *ngIf="selectedFile !== null" type="button" class="btn btn-danger btn-md px-4 me-md-2 rounded-0">Recognize</button>
+                <button *ngIf="selectedFile !== null" type="button" class="btn btn-danger btn-md px-4 me-md-2 rounded-0" (click)="onFileSubmit()">Recognize</button>
             </div>
         </div>
     </div>
