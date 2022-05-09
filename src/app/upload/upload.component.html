@@ -8,7 +8,7 @@
             <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum recusandae aliquid suscipit iusto. Enim autem ratione placeat earum asperiores architecto facilis corrupti voluptatibus, beatae aspernatur omnis consequatur impedit rem sint.</p>
             <div class="d-grid gap-2 d-md-flex justify-content-md-start">
                 <div>
-                    <input class="form-control rounded-0" type="file" id="formFile">
+                    <input class="form-control rounded-0" type="file" id="formFile" (change)="onFileSelected($event)">
                 </div>
                 <button type="button" class="btn btn-danger btn-md px-4 me-md-2 rounded-0">Recognize</button>
             </div>
