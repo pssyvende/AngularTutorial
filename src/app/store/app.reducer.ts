@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store"
-import { startRequesting } from "./app.actions"
+import { requestedSuccesfully, startRequesting } from "./app.actions"
 
 export interface State {
     isRequesting: boolean
@@ -16,6 +16,13 @@ export const appReducer = createReducer(
         return ({
             ...state,
             isRequesting: true
+        });
+    }),
+    on(requestedSuccesfully, state => {
+        console.log('Requested succesfully!');
+        return ({
+            ...state,
+            isRequesting: false
         });
     })
 );

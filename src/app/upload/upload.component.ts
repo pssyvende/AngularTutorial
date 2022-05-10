@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Response, Result } from './response.model';
 import { Store } from '@ngrx/store';
 import { State } from '../store/app.reducer';
-import { startRequesting } from '../store/app.actions';
+import { requestedSuccesfully, startRequesting } from '../store/app.actions';
 
 @Component({
   selector: 'app-upload',
@@ -46,6 +46,7 @@ export class UploadComponent implements OnInit {
       const upload$ = this.http.post<Response>("https://api.trace.moe/search?anilistInfo", formData);
       upload$.subscribe(response => {
         this.resultsList = response.result;
+        this.store.dispatch(requestedSuccesfully());
       });
     }
   }
