@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Response } from './response.model';
 
 @Component({
   selector: 'app-upload',
@@ -33,8 +34,8 @@ export class UploadComponent implements OnInit {
     if (this.selectedFile) {
       const formData = new FormData();
       formData.append("image", this.selectedFile);
-      const upload$ = this.http.post("https://api.trace.moe/search", formData);
-      upload$.subscribe(data => console.log(data));
+      const upload$ = this.http.post<Response>("https://api.trace.moe/search", formData);
+      upload$.subscribe(response => console.log(response.result));
     }
   }
 }
