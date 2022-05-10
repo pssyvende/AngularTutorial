@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Response } from './response.model';
+import { Response, Result } from './response.model';
 
 @Component({
   selector: 'app-upload',
@@ -10,6 +10,7 @@ import { Response } from './response.model';
 export class UploadComponent implements OnInit {
   selectedFile: File | null = null;
   imageUrl: string | ArrayBuffer | null = null;
+  resultsList: Result[] = [];
 
   constructor(private http: HttpClient) { }
 
@@ -34,8 +35,14 @@ export class UploadComponent implements OnInit {
     if (this.selectedFile) {
       const formData = new FormData();
       formData.append("image", this.selectedFile);
-      const upload$ = this.http.post<Response>("https://api.trace.moe/search", formData);
-      upload$.subscribe(response => console.log(response.result));
+      const upload$ = this.http.post<Response>("https://api.trace.moe/search?anilistInfo", formData);
+      upload$.subscribe(response => {
+        this.resultsList = response.result;
+      });
     }
+  }
+
+  convertSimilarity(similarity: number) {
+    return Math.round(similarity * 100 * 100) / 100;
   }
 }
