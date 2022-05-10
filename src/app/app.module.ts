@@ -9,6 +9,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { appReducer } from './store/app.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { AppEffects } from './store/app.effects';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { appReducer } from './store/app.reducer';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({ app: appReducer})
+    StoreModule.forRoot({ app: appReducer}),
+    EffectsModule.forRoot([AppEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

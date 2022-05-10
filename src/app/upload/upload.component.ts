@@ -42,12 +42,7 @@ export class UploadComponent implements OnInit {
     if (this.selectedFile) {
       const formData = new FormData();
       formData.append("image", this.selectedFile);
-      this.store.dispatch(startRequesting());
-      const upload$ = this.http.post<Response>("https://api.trace.moe/search?anilistInfo", formData);
-      upload$.subscribe(response => {
-        this.resultsList = response.result;
-        this.store.dispatch(requestedSuccesfully());
-      });
+      this.store.dispatch(startRequesting({image: formData}));
     }
   }
 
