@@ -21,6 +21,7 @@ export class UploadComponent implements OnInit {
   ngOnInit(): void {
     this.store.select('app').subscribe(appState => {
       this.isRequesting = appState.isRequesting;
+      this.resultsList = appState.result;
     })
   }
 

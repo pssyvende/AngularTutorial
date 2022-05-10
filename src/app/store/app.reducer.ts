@@ -1,12 +1,15 @@
 import { createReducer, on } from "@ngrx/store"
+import { Result } from "../upload/response.model";
 import { requestedSuccesfully, startRequesting } from "./app.actions"
 
 export interface State {
-    isRequesting: boolean
+    isRequesting: boolean,
+    result: Result[]
 }
 
 export const initialState: State = {
-    isRequesting: false
+    isRequesting: false,
+    result: []
 };
 
 export const appReducer = createReducer(
@@ -18,11 +21,12 @@ export const appReducer = createReducer(
             isRequesting: true
         });
     }),
-    on(requestedSuccesfully, state => {
+    on(requestedSuccesfully, (state, { result }) => {
         console.log('Requested succesfully!');
         return ({
             ...state,
-            isRequesting: false
+            isRequesting: false,
+            result: result
         });
     })
 );

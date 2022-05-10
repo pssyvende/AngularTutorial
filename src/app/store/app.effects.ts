@@ -18,7 +18,7 @@ export class AppEffects {
             return this.http.post<Response>('https://api.trace.moe/search?anilistInfo', action.image).pipe(
                 map((response) => {
                     console.log("In effect!");
-                    return requestedSuccesfully();
+                    return requestedSuccesfully({ result: response.result });
                 })
             )
         })
