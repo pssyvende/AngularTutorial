@@ -11,8 +11,11 @@ export const initialState: State = {
 
 export const appReducer = createReducer(
     initialState,
-    on(startRequesting, state => ({
-        ...state,
-        isRequesting: true
-    }))
+    on(startRequesting, state => {
+        console.log('Start requesting!');
+        return ({
+            ...state,
+            isRequesting: true
+        });
+    })
 );

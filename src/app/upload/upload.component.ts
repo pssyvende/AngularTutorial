@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Response, Result } from './response.model';
+import { Store } from '@ngrx/store';
+import { State } from '../store/app.reducer';
+import { startRequesting } from '../store/app.actions';
 
 @Component({
   selector: 'app-upload',
@@ -12,7 +15,7 @@ export class UploadComponent implements OnInit {
   imageUrl: string | ArrayBuffer | null = null;
   resultsList: Result[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private store: Store<{app: State}>) { }
 
   ngOnInit(): void {
   }
@@ -35,6 +38,7 @@ export class UploadComponent implements OnInit {
     if (this.selectedFile) {
       const formData = new FormData();
       formData.append("image", this.selectedFile);
+      this.store.dispatch(startRequesting());
       const upload$ = this.http.post<Response>("https://api.trace.moe/search?anilistInfo", formData);
       upload$.subscribe(response => {
         this.resultsList = response.result;
