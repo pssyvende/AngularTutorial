@@ -14,10 +14,14 @@ export class UploadComponent implements OnInit {
   selectedFile: File | null = null;
   imageUrl: string | ArrayBuffer | null = null;
   resultsList: Result[] = [];
+  isRequesting: boolean = false;
 
   constructor(private http: HttpClient, private store: Store<{app: State}>) { }
 
   ngOnInit(): void {
+    this.store.select('app').subscribe(appState => {
+      this.isRequesting = appState.isRequesting;
+    })
   }
 
   onFileSelected(event: any) {
